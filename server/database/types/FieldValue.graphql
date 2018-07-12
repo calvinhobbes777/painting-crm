@@ -1,0 +1,5 @@
+type FieldValue {
+  id: ID! @unique
+  field: Field @relation(name: "Field", onDelete: SET_NULL)
+  value: Value @relation(name: "Value", onDelete: SET_NULL)
+}

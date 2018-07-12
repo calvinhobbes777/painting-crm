@@ -1,0 +1,29 @@
+secret: ${env:PRISMA_SECRET}
+endpoint: ${env:PRISMA_ENDPOINT}
+
+datamodel:
+- types/User.graphql
+- types/Thread.graphql
+- types/Comment.graphql
+- types/Customer.graphql
+- types/Task.graphql
+- types/Job.graphql
+- types/Role.graphql
+- types/File.graphql
+- types/Field.graphql
+- types/Value.graphql
+- types/FieldValue.graphql
+- types/Notification.graphql
+- enums/FieldType.graphql
+- enums/FieldEntity.graphql
+- fragments/FieldValue.graphql
+
+
+hooks:
+  post-deploy:
+    - echo "Deployment finished"
+    - graphql get-schema --project database
+    - graphql prepare
+    - echo "Prisma GraphQL Database Schema generated"
+
+

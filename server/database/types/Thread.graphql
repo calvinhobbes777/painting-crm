@@ -1,0 +1,19 @@
+# Thread
+type Thread {
+  id: ID! @unique
+  type: FieldEntity!
+  entity: ThreadEntityValue!
+  title: String
+  author: User! @relation(name: "ThreadUserRelation", onDelete: SET_NULL)
+  comments: [Comment!]! @relation(name: "ThreadCommentRelation", onDelete: SET_NULL)
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ThreadEntityValue {
+  id: ID! @unique
+  JOB: Job @relation(name: "ThreadEntityJobRelation", onDelete: SET_NULL)
+  TASK: Task @relation(name: "ThreadEntityTaskRelation", onDelete: SET_NULL)
+  USER: User @relation(name: "ThreadEntityUserRelation", onDelete: SET_NULL)
+  CUSTOMER: Customer @relation(name: "ThreadEntityCustomerRelation", onDelete: SET_NULL)
+}

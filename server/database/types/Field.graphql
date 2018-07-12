@@ -1,0 +1,13 @@
+# FIELD
+type Field {
+  id: ID! @unique
+  name: String!
+  type: FieldType
+  entity: FieldEntity
+  values: [String!]
+  size: Int! @default(value: 1)
+  order: Int
+  static: Boolean! @default(value: false)
+  read: [Role!]! @relation(name: "RoleReadPermissions", onDelete: SET_NULL)
+  write: [Role!]! @relation(name: "RoleWritePermissions", onDelete: SET_NULL)
+}

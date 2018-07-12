@@ -1,0 +1,12 @@
+type Value {
+  id: ID! @unique
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOAD: File @relation(name: "ValueFile", onDelete: SET_NULL)
+  UPLOADS: [File!]! @relation(name: "ValueFiles", onDelete: SET_NULL)
+}

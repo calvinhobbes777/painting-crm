@@ -1,0 +1,10 @@
+# Customer
+type Customer {
+  id: ID! @unique
+  salesManager: User @relation(name: "CustomerSalesManager", onDelete: SET_NULL)
+  accountExecutive: User @relation(name: "CustomerAccountManager", onDelete: SET_NULL)
+  fields: [FieldValue!]! @relation(name: "CustomerFieldValue", onDelete: SET_NULL)
+  tasks: [Task!]! @relation(name: "CustomerTaskRelation", onDelete: SET_NULL)
+  jobs: [Job!]! @relation(name: "CustomerJobRelation", onDelete: SET_NULL)
+  threads: [Thread!]! @relation(name: "CustomerThreadRelation", onDelete: SET_NULL)
+}

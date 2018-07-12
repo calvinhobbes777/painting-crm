@@ -1,0 +1,13 @@
+# Thread
+type Notification {
+  id: ID! @unique
+  read: Boolean! @default(value: false)
+  user: User!
+  title: String!
+  body: String!
+  type: FieldEntity!
+  entity: ID!
+  link: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

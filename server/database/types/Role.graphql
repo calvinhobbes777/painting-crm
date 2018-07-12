@@ -1,0 +1,9 @@
+# ROLE
+type Role {
+  id: ID! @unique
+  name: String! @unique
+  type: String! @unique
+  permissions: Json!
+  read: [Field!]! @relation(name: "RoleReadPermissions", onDelete: SET_NULL)
+  write: [Field!]! @relation(name: "RoleWritePermissions", onDelete: SET_NULL)
+}

@@ -1,0 +1,4369 @@
+# source: http://localhost:4466
+# timestamp: Sat Jul 07 2018 16:41:13 GMT-0700 (PDT)
+
+type AggregateComment {
+  count: Int!
+}
+
+type AggregateCustomer {
+  count: Int!
+}
+
+type AggregateField {
+  count: Int!
+}
+
+type AggregateFieldValue {
+  count: Int!
+}
+
+type AggregateFile {
+  count: Int!
+}
+
+type AggregateJob {
+  count: Int!
+}
+
+type AggregateNotification {
+  count: Int!
+}
+
+type AggregateRole {
+  count: Int!
+}
+
+type AggregateTask {
+  count: Int!
+}
+
+type AggregateThread {
+  count: Int!
+}
+
+type AggregateThreadEntityValue {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type AggregateValue {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+type Comment implements Node {
+  id: ID!
+  body: String
+  thread(where: ThreadWhereInput): Thread!
+  author(where: UserWhereInput): User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type CommentConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CommentEdge]!
+  aggregate: AggregateComment!
+}
+
+input CommentCreateInput {
+  body: String
+  thread: ThreadCreateOneWithoutCommentsInput!
+  author: UserCreateOneInput!
+}
+
+input CommentCreateManyWithoutThreadInput {
+  create: [CommentCreateWithoutThreadInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutThreadInput {
+  body: String
+  author: UserCreateOneInput!
+}
+
+"""An edge in a connection."""
+type CommentEdge {
+  """The item at the end of the edge."""
+  node: Comment!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CommentOrderByInput {
+  id_ASC
+  id_DESC
+  body_ASC
+  body_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type CommentPreviousValues {
+  id: ID!
+  body: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  node: Comment
+  updatedFields: [String!]
+  previousValues: CommentPreviousValues
+}
+
+input CommentSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CommentSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CommentSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CommentSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CommentWhereInput
+}
+
+input CommentUpdateInput {
+  body: String
+  thread: ThreadUpdateOneWithoutCommentsInput
+  author: UserUpdateOneInput
+}
+
+input CommentUpdateManyWithoutThreadInput {
+  create: [CommentCreateWithoutThreadInput!]
+  connect: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutThreadInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutThreadInput!]
+}
+
+input CommentUpdateWithoutThreadDataInput {
+  body: String
+  author: UserUpdateOneInput
+}
+
+input CommentUpdateWithWhereUniqueWithoutThreadInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutThreadDataInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutThreadInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutThreadDataInput!
+  create: CommentCreateWithoutThreadInput!
+}
+
+input CommentWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CommentWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CommentWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CommentWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  body: String
+
+  """All values that are not equal to given value."""
+  body_not: String
+
+  """All values that are contained in given list."""
+  body_in: [String!]
+
+  """All values that are not contained in given list."""
+  body_not_in: [String!]
+
+  """All values less than the given value."""
+  body_lt: String
+
+  """All values less than or equal the given value."""
+  body_lte: String
+
+  """All values greater than the given value."""
+  body_gt: String
+
+  """All values greater than or equal the given value."""
+  body_gte: String
+
+  """All values containing the given string."""
+  body_contains: String
+
+  """All values not containing the given string."""
+  body_not_contains: String
+
+  """All values starting with the given string."""
+  body_starts_with: String
+
+  """All values not starting with the given string."""
+  body_not_starts_with: String
+
+  """All values ending with the given string."""
+  body_ends_with: String
+
+  """All values not ending with the given string."""
+  body_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  thread: ThreadWhereInput
+  author: UserWhereInput
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
+type Customer implements Node {
+  id: ID!
+  salesManager(where: UserWhereInput): User
+  accountExecutive(where: UserWhereInput): User
+  fields(where: FieldValueWhereInput, orderBy: FieldValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FieldValue!]
+  tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
+  jobs(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Job!]
+  threads(where: ThreadWhereInput, orderBy: ThreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Thread!]
+}
+
+"""A connection to a list of items."""
+type CustomerConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CustomerEdge]!
+  aggregate: AggregateCustomer!
+}
+
+input CustomerCreateInput {
+  salesManager: UserCreateOneInput
+  accountExecutive: UserCreateOneInput
+  fields: FieldValueCreateManyInput
+  tasks: TaskCreateManyWithoutCustomerInput
+  jobs: JobCreateManyWithoutCustomerInput
+  threads: ThreadCreateManyInput
+}
+
+input CustomerCreateOneInput {
+  create: CustomerCreateInput
+  connect: CustomerWhereUniqueInput
+}
+
+input CustomerCreateOneWithoutJobsInput {
+  create: CustomerCreateWithoutJobsInput
+  connect: CustomerWhereUniqueInput
+}
+
+input CustomerCreateOneWithoutTasksInput {
+  create: CustomerCreateWithoutTasksInput
+  connect: CustomerWhereUniqueInput
+}
+
+input CustomerCreateWithoutJobsInput {
+  salesManager: UserCreateOneInput
+  accountExecutive: UserCreateOneInput
+  fields: FieldValueCreateManyInput
+  tasks: TaskCreateManyWithoutCustomerInput
+  threads: ThreadCreateManyInput
+}
+
+input CustomerCreateWithoutTasksInput {
+  salesManager: UserCreateOneInput
+  accountExecutive: UserCreateOneInput
+  fields: FieldValueCreateManyInput
+  jobs: JobCreateManyWithoutCustomerInput
+  threads: ThreadCreateManyInput
+}
+
+"""An edge in a connection."""
+type CustomerEdge {
+  """The item at the end of the edge."""
+  node: Customer!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CustomerOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CustomerPreviousValues {
+  id: ID!
+}
+
+type CustomerSubscriptionPayload {
+  mutation: MutationType!
+  node: Customer
+  updatedFields: [String!]
+  previousValues: CustomerPreviousValues
+}
+
+input CustomerSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CustomerSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CustomerSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CustomerSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CustomerWhereInput
+}
+
+input CustomerUpdateDataInput {
+  salesManager: UserUpdateOneInput
+  accountExecutive: UserUpdateOneInput
+  fields: FieldValueUpdateManyInput
+  tasks: TaskUpdateManyWithoutCustomerInput
+  jobs: JobUpdateManyWithoutCustomerInput
+  threads: ThreadUpdateManyInput
+}
+
+input CustomerUpdateInput {
+  salesManager: UserUpdateOneInput
+  accountExecutive: UserUpdateOneInput
+  fields: FieldValueUpdateManyInput
+  tasks: TaskUpdateManyWithoutCustomerInput
+  jobs: JobUpdateManyWithoutCustomerInput
+  threads: ThreadUpdateManyInput
+}
+
+input CustomerUpdateOneInput {
+  create: CustomerCreateInput
+  connect: CustomerWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CustomerUpdateDataInput
+  upsert: CustomerUpsertNestedInput
+}
+
+input CustomerUpdateOneWithoutJobsInput {
+  create: CustomerCreateWithoutJobsInput
+  connect: CustomerWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CustomerUpdateWithoutJobsDataInput
+  upsert: CustomerUpsertWithoutJobsInput
+}
+
+input CustomerUpdateOneWithoutTasksInput {
+  create: CustomerCreateWithoutTasksInput
+  connect: CustomerWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CustomerUpdateWithoutTasksDataInput
+  upsert: CustomerUpsertWithoutTasksInput
+}
+
+input CustomerUpdateWithoutJobsDataInput {
+  salesManager: UserUpdateOneInput
+  accountExecutive: UserUpdateOneInput
+  fields: FieldValueUpdateManyInput
+  tasks: TaskUpdateManyWithoutCustomerInput
+  threads: ThreadUpdateManyInput
+}
+
+input CustomerUpdateWithoutTasksDataInput {
+  salesManager: UserUpdateOneInput
+  accountExecutive: UserUpdateOneInput
+  fields: FieldValueUpdateManyInput
+  jobs: JobUpdateManyWithoutCustomerInput
+  threads: ThreadUpdateManyInput
+}
+
+input CustomerUpsertNestedInput {
+  update: CustomerUpdateDataInput!
+  create: CustomerCreateInput!
+}
+
+input CustomerUpsertWithoutJobsInput {
+  update: CustomerUpdateWithoutJobsDataInput!
+  create: CustomerCreateWithoutJobsInput!
+}
+
+input CustomerUpsertWithoutTasksInput {
+  update: CustomerUpdateWithoutTasksDataInput!
+  create: CustomerCreateWithoutTasksInput!
+}
+
+input CustomerWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CustomerWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CustomerWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CustomerWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  salesManager: UserWhereInput
+  accountExecutive: UserWhereInput
+  fields_every: FieldValueWhereInput
+  fields_some: FieldValueWhereInput
+  fields_none: FieldValueWhereInput
+  tasks_every: TaskWhereInput
+  tasks_some: TaskWhereInput
+  tasks_none: TaskWhereInput
+  jobs_every: JobWhereInput
+  jobs_some: JobWhereInput
+  jobs_none: JobWhereInput
+  threads_every: ThreadWhereInput
+  threads_some: ThreadWhereInput
+  threads_none: ThreadWhereInput
+}
+
+input CustomerWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+type Field implements Node {
+  id: ID!
+  name: String!
+  type: FieldType
+  entity: FieldEntity
+  values: [String!]
+  size: Int!
+  order: Int
+  static: Boolean!
+  read(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role!]
+  write(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role!]
+}
+
+"""A connection to a list of items."""
+type FieldConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FieldEdge]!
+  aggregate: AggregateField!
+}
+
+input FieldCreateInput {
+  name: String!
+  type: FieldType
+  entity: FieldEntity
+  size: Int
+  order: Int
+  static: Boolean
+  values: FieldCreatevaluesInput
+  read: RoleCreateManyInput
+  write: RoleCreateManyInput
+}
+
+input FieldCreateManyInput {
+  create: [FieldCreateInput!]
+  connect: [FieldWhereUniqueInput!]
+}
+
+input FieldCreateOneInput {
+  create: FieldCreateInput
+  connect: FieldWhereUniqueInput
+}
+
+input FieldCreatevaluesInput {
+  set: [String!]
+}
+
+"""An edge in a connection."""
+type FieldEdge {
+  """The item at the end of the edge."""
+  node: Field!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FieldEntity {
+  CUSTOMER
+  JOB
+  TASK
+  USER
+}
+
+enum FieldOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  type_ASC
+  type_DESC
+  entity_ASC
+  entity_DESC
+  size_ASC
+  size_DESC
+  order_ASC
+  order_DESC
+  static_ASC
+  static_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type FieldPreviousValues {
+  id: ID!
+  name: String!
+  type: FieldType
+  entity: FieldEntity
+  values: [String!]
+  size: Int!
+  order: Int
+  static: Boolean!
+}
+
+type FieldSubscriptionPayload {
+  mutation: MutationType!
+  node: Field
+  updatedFields: [String!]
+  previousValues: FieldPreviousValues
+}
+
+input FieldSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FieldSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FieldSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FieldSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FieldWhereInput
+}
+
+enum FieldType {
+  TEXT
+  LONGTEXT
+  NUMBER
+  CURRENCY
+  SELECT
+  DATE
+  YESNO
+  UPLOAD
+  UPLOADS
+}
+
+input FieldUpdateDataInput {
+  name: String
+  type: FieldType
+  entity: FieldEntity
+  size: Int
+  order: Int
+  static: Boolean
+  values: FieldUpdatevaluesInput
+  read: RoleUpdateManyInput
+  write: RoleUpdateManyInput
+}
+
+input FieldUpdateInput {
+  name: String
+  type: FieldType
+  entity: FieldEntity
+  size: Int
+  order: Int
+  static: Boolean
+  values: FieldUpdatevaluesInput
+  read: RoleUpdateManyInput
+  write: RoleUpdateManyInput
+}
+
+input FieldUpdateManyInput {
+  create: [FieldCreateInput!]
+  connect: [FieldWhereUniqueInput!]
+  disconnect: [FieldWhereUniqueInput!]
+  delete: [FieldWhereUniqueInput!]
+  update: [FieldUpdateWithWhereUniqueNestedInput!]
+  upsert: [FieldUpsertWithWhereUniqueNestedInput!]
+}
+
+input FieldUpdateOneInput {
+  create: FieldCreateInput
+  connect: FieldWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: FieldUpdateDataInput
+  upsert: FieldUpsertNestedInput
+}
+
+input FieldUpdatevaluesInput {
+  set: [String!]
+}
+
+input FieldUpdateWithWhereUniqueNestedInput {
+  where: FieldWhereUniqueInput!
+  data: FieldUpdateDataInput!
+}
+
+input FieldUpsertNestedInput {
+  update: FieldUpdateDataInput!
+  create: FieldCreateInput!
+}
+
+input FieldUpsertWithWhereUniqueNestedInput {
+  where: FieldWhereUniqueInput!
+  update: FieldUpdateDataInput!
+  create: FieldCreateInput!
+}
+
+type FieldValue implements Node {
+  id: ID!
+  field(where: FieldWhereInput): Field
+  value(where: ValueWhereInput): Value
+}
+
+"""A connection to a list of items."""
+type FieldValueConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FieldValueEdge]!
+  aggregate: AggregateFieldValue!
+}
+
+input FieldValueCreateInput {
+  field: FieldCreateOneInput
+  value: ValueCreateOneInput
+}
+
+input FieldValueCreateManyInput {
+  create: [FieldValueCreateInput!]
+  connect: [FieldValueWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type FieldValueEdge {
+  """The item at the end of the edge."""
+  node: FieldValue!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FieldValueOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type FieldValuePreviousValues {
+  id: ID!
+}
+
+type FieldValueSubscriptionPayload {
+  mutation: MutationType!
+  node: FieldValue
+  updatedFields: [String!]
+  previousValues: FieldValuePreviousValues
+}
+
+input FieldValueSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FieldValueSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FieldValueSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FieldValueSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FieldValueWhereInput
+}
+
+input FieldValueUpdateDataInput {
+  field: FieldUpdateOneInput
+  value: ValueUpdateOneInput
+}
+
+input FieldValueUpdateInput {
+  field: FieldUpdateOneInput
+  value: ValueUpdateOneInput
+}
+
+input FieldValueUpdateManyInput {
+  create: [FieldValueCreateInput!]
+  connect: [FieldValueWhereUniqueInput!]
+  disconnect: [FieldValueWhereUniqueInput!]
+  delete: [FieldValueWhereUniqueInput!]
+  update: [FieldValueUpdateWithWhereUniqueNestedInput!]
+  upsert: [FieldValueUpsertWithWhereUniqueNestedInput!]
+}
+
+input FieldValueUpdateWithWhereUniqueNestedInput {
+  where: FieldValueWhereUniqueInput!
+  data: FieldValueUpdateDataInput!
+}
+
+input FieldValueUpsertWithWhereUniqueNestedInput {
+  where: FieldValueWhereUniqueInput!
+  update: FieldValueUpdateDataInput!
+  create: FieldValueCreateInput!
+}
+
+input FieldValueWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FieldValueWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FieldValueWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FieldValueWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  field: FieldWhereInput
+  value: ValueWhereInput
+}
+
+input FieldValueWhereUniqueInput {
+  id: ID
+}
+
+input FieldWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FieldWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FieldWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FieldWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: FieldType
+
+  """All values that are not equal to given value."""
+  type_not: FieldType
+
+  """All values that are contained in given list."""
+  type_in: [FieldType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [FieldType!]
+  entity: FieldEntity
+
+  """All values that are not equal to given value."""
+  entity_not: FieldEntity
+
+  """All values that are contained in given list."""
+  entity_in: [FieldEntity!]
+
+  """All values that are not contained in given list."""
+  entity_not_in: [FieldEntity!]
+  size: Int
+
+  """All values that are not equal to given value."""
+  size_not: Int
+
+  """All values that are contained in given list."""
+  size_in: [Int!]
+
+  """All values that are not contained in given list."""
+  size_not_in: [Int!]
+
+  """All values less than the given value."""
+  size_lt: Int
+
+  """All values less than or equal the given value."""
+  size_lte: Int
+
+  """All values greater than the given value."""
+  size_gt: Int
+
+  """All values greater than or equal the given value."""
+  size_gte: Int
+  order: Int
+
+  """All values that are not equal to given value."""
+  order_not: Int
+
+  """All values that are contained in given list."""
+  order_in: [Int!]
+
+  """All values that are not contained in given list."""
+  order_not_in: [Int!]
+
+  """All values less than the given value."""
+  order_lt: Int
+
+  """All values less than or equal the given value."""
+  order_lte: Int
+
+  """All values greater than the given value."""
+  order_gt: Int
+
+  """All values greater than or equal the given value."""
+  order_gte: Int
+  static: Boolean
+
+  """All values that are not equal to given value."""
+  static_not: Boolean
+  read_every: RoleWhereInput
+  read_some: RoleWhereInput
+  read_none: RoleWhereInput
+  write_every: RoleWhereInput
+  write_some: RoleWhereInput
+  write_none: RoleWhereInput
+}
+
+input FieldWhereUniqueInput {
+  id: ID
+}
+
+type File implements Node {
+  id: ID!
+  name: String!
+  size: Int!
+  secret: String!
+  type: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  url: String!
+  value(where: ValueWhereInput): Value
+  values(where: ValueWhereInput): Value
+}
+
+"""A connection to a list of items."""
+type FileConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FileEdge]!
+  aggregate: AggregateFile!
+}
+
+input FileCreateInput {
+  name: String!
+  size: Int!
+  secret: String!
+  type: String!
+  url: String!
+  value: ValueCreateOneWithoutUPLOADInput
+  values: ValueCreateOneWithoutUPLOADSInput
+}
+
+input FileCreateManyWithoutValuesInput {
+  create: [FileCreateWithoutValuesInput!]
+  connect: [FileWhereUniqueInput!]
+}
+
+input FileCreateOneWithoutValueInput {
+  create: FileCreateWithoutValueInput
+  connect: FileWhereUniqueInput
+}
+
+input FileCreateWithoutValueInput {
+  name: String!
+  size: Int!
+  secret: String!
+  type: String!
+  url: String!
+  values: ValueCreateOneWithoutUPLOADSInput
+}
+
+input FileCreateWithoutValuesInput {
+  name: String!
+  size: Int!
+  secret: String!
+  type: String!
+  url: String!
+  value: ValueCreateOneWithoutUPLOADInput
+}
+
+"""An edge in a connection."""
+type FileEdge {
+  """The item at the end of the edge."""
+  node: File!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FileOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  size_ASC
+  size_DESC
+  secret_ASC
+  secret_DESC
+  type_ASC
+  type_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  url_ASC
+  url_DESC
+}
+
+type FilePreviousValues {
+  id: ID!
+  name: String!
+  size: Int!
+  secret: String!
+  type: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  url: String!
+}
+
+type FileSubscriptionPayload {
+  mutation: MutationType!
+  node: File
+  updatedFields: [String!]
+  previousValues: FilePreviousValues
+}
+
+input FileSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FileSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FileSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FileSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FileWhereInput
+}
+
+input FileUpdateInput {
+  name: String
+  size: Int
+  secret: String
+  type: String
+  url: String
+  value: ValueUpdateOneWithoutUPLOADInput
+  values: ValueUpdateOneWithoutUPLOADSInput
+}
+
+input FileUpdateManyWithoutValuesInput {
+  create: [FileCreateWithoutValuesInput!]
+  connect: [FileWhereUniqueInput!]
+  disconnect: [FileWhereUniqueInput!]
+  delete: [FileWhereUniqueInput!]
+  update: [FileUpdateWithWhereUniqueWithoutValuesInput!]
+  upsert: [FileUpsertWithWhereUniqueWithoutValuesInput!]
+}
+
+input FileUpdateOneWithoutValueInput {
+  create: FileCreateWithoutValueInput
+  connect: FileWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: FileUpdateWithoutValueDataInput
+  upsert: FileUpsertWithoutValueInput
+}
+
+input FileUpdateWithoutValueDataInput {
+  name: String
+  size: Int
+  secret: String
+  type: String
+  url: String
+  values: ValueUpdateOneWithoutUPLOADSInput
+}
+
+input FileUpdateWithoutValuesDataInput {
+  name: String
+  size: Int
+  secret: String
+  type: String
+  url: String
+  value: ValueUpdateOneWithoutUPLOADInput
+}
+
+input FileUpdateWithWhereUniqueWithoutValuesInput {
+  where: FileWhereUniqueInput!
+  data: FileUpdateWithoutValuesDataInput!
+}
+
+input FileUpsertWithoutValueInput {
+  update: FileUpdateWithoutValueDataInput!
+  create: FileCreateWithoutValueInput!
+}
+
+input FileUpsertWithWhereUniqueWithoutValuesInput {
+  where: FileWhereUniqueInput!
+  update: FileUpdateWithoutValuesDataInput!
+  create: FileCreateWithoutValuesInput!
+}
+
+input FileWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FileWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FileWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FileWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  size: Int
+
+  """All values that are not equal to given value."""
+  size_not: Int
+
+  """All values that are contained in given list."""
+  size_in: [Int!]
+
+  """All values that are not contained in given list."""
+  size_not_in: [Int!]
+
+  """All values less than the given value."""
+  size_lt: Int
+
+  """All values less than or equal the given value."""
+  size_lte: Int
+
+  """All values greater than the given value."""
+  size_gt: Int
+
+  """All values greater than or equal the given value."""
+  size_gte: Int
+  secret: String
+
+  """All values that are not equal to given value."""
+  secret_not: String
+
+  """All values that are contained in given list."""
+  secret_in: [String!]
+
+  """All values that are not contained in given list."""
+  secret_not_in: [String!]
+
+  """All values less than the given value."""
+  secret_lt: String
+
+  """All values less than or equal the given value."""
+  secret_lte: String
+
+  """All values greater than the given value."""
+  secret_gt: String
+
+  """All values greater than or equal the given value."""
+  secret_gte: String
+
+  """All values containing the given string."""
+  secret_contains: String
+
+  """All values not containing the given string."""
+  secret_not_contains: String
+
+  """All values starting with the given string."""
+  secret_starts_with: String
+
+  """All values not starting with the given string."""
+  secret_not_starts_with: String
+
+  """All values ending with the given string."""
+  secret_ends_with: String
+
+  """All values not ending with the given string."""
+  secret_not_ends_with: String
+  type: String
+
+  """All values that are not equal to given value."""
+  type_not: String
+
+  """All values that are contained in given list."""
+  type_in: [String!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
+
+  """All values less than the given value."""
+  type_lt: String
+
+  """All values less than or equal the given value."""
+  type_lte: String
+
+  """All values greater than the given value."""
+  type_gt: String
+
+  """All values greater than or equal the given value."""
+  type_gte: String
+
+  """All values containing the given string."""
+  type_contains: String
+
+  """All values not containing the given string."""
+  type_not_contains: String
+
+  """All values starting with the given string."""
+  type_starts_with: String
+
+  """All values not starting with the given string."""
+  type_not_starts_with: String
+
+  """All values ending with the given string."""
+  type_ends_with: String
+
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  url: String
+
+  """All values that are not equal to given value."""
+  url_not: String
+
+  """All values that are contained in given list."""
+  url_in: [String!]
+
+  """All values that are not contained in given list."""
+  url_not_in: [String!]
+
+  """All values less than the given value."""
+  url_lt: String
+
+  """All values less than or equal the given value."""
+  url_lte: String
+
+  """All values greater than the given value."""
+  url_gt: String
+
+  """All values greater than or equal the given value."""
+  url_gte: String
+
+  """All values containing the given string."""
+  url_contains: String
+
+  """All values not containing the given string."""
+  url_not_contains: String
+
+  """All values starting with the given string."""
+  url_starts_with: String
+
+  """All values not starting with the given string."""
+  url_not_starts_with: String
+
+  """All values ending with the given string."""
+  url_ends_with: String
+
+  """All values not ending with the given string."""
+  url_not_ends_with: String
+  value: ValueWhereInput
+  values: ValueWhereInput
+}
+
+input FileWhereUniqueInput {
+  id: ID
+  secret: String
+  url: String
+}
+
+type Job implements Node {
+  id: ID!
+  fields(where: FieldValueWhereInput, orderBy: FieldValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FieldValue!]
+  tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
+  customer(where: CustomerWhereInput): Customer
+  threads(where: ThreadWhereInput, orderBy: ThreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Thread!]
+}
+
+"""A connection to a list of items."""
+type JobConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [JobEdge]!
+  aggregate: AggregateJob!
+}
+
+input JobCreateInput {
+  fields: FieldValueCreateManyInput
+  tasks: TaskCreateManyInput
+  customer: CustomerCreateOneWithoutJobsInput
+  threads: ThreadCreateManyInput
+}
+
+input JobCreateManyInput {
+  create: [JobCreateInput!]
+  connect: [JobWhereUniqueInput!]
+}
+
+input JobCreateManyWithoutCustomerInput {
+  create: [JobCreateWithoutCustomerInput!]
+  connect: [JobWhereUniqueInput!]
+}
+
+input JobCreateOneInput {
+  create: JobCreateInput
+  connect: JobWhereUniqueInput
+}
+
+input JobCreateWithoutCustomerInput {
+  fields: FieldValueCreateManyInput
+  tasks: TaskCreateManyInput
+  threads: ThreadCreateManyInput
+}
+
+"""An edge in a connection."""
+type JobEdge {
+  """The item at the end of the edge."""
+  node: Job!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum JobOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type JobPreviousValues {
+  id: ID!
+}
+
+type JobSubscriptionPayload {
+  mutation: MutationType!
+  node: Job
+  updatedFields: [String!]
+  previousValues: JobPreviousValues
+}
+
+input JobSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [JobSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [JobSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [JobSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: JobWhereInput
+}
+
+input JobUpdateDataInput {
+  fields: FieldValueUpdateManyInput
+  tasks: TaskUpdateManyInput
+  customer: CustomerUpdateOneWithoutJobsInput
+  threads: ThreadUpdateManyInput
+}
+
+input JobUpdateInput {
+  fields: FieldValueUpdateManyInput
+  tasks: TaskUpdateManyInput
+  customer: CustomerUpdateOneWithoutJobsInput
+  threads: ThreadUpdateManyInput
+}
+
+input JobUpdateManyInput {
+  create: [JobCreateInput!]
+  connect: [JobWhereUniqueInput!]
+  disconnect: [JobWhereUniqueInput!]
+  delete: [JobWhereUniqueInput!]
+  update: [JobUpdateWithWhereUniqueNestedInput!]
+  upsert: [JobUpsertWithWhereUniqueNestedInput!]
+}
+
+input JobUpdateManyWithoutCustomerInput {
+  create: [JobCreateWithoutCustomerInput!]
+  connect: [JobWhereUniqueInput!]
+  disconnect: [JobWhereUniqueInput!]
+  delete: [JobWhereUniqueInput!]
+  update: [JobUpdateWithWhereUniqueWithoutCustomerInput!]
+  upsert: [JobUpsertWithWhereUniqueWithoutCustomerInput!]
+}
+
+input JobUpdateOneInput {
+  create: JobCreateInput
+  connect: JobWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: JobUpdateDataInput
+  upsert: JobUpsertNestedInput
+}
+
+input JobUpdateWithoutCustomerDataInput {
+  fields: FieldValueUpdateManyInput
+  tasks: TaskUpdateManyInput
+  threads: ThreadUpdateManyInput
+}
+
+input JobUpdateWithWhereUniqueNestedInput {
+  where: JobWhereUniqueInput!
+  data: JobUpdateDataInput!
+}
+
+input JobUpdateWithWhereUniqueWithoutCustomerInput {
+  where: JobWhereUniqueInput!
+  data: JobUpdateWithoutCustomerDataInput!
+}
+
+input JobUpsertNestedInput {
+  update: JobUpdateDataInput!
+  create: JobCreateInput!
+}
+
+input JobUpsertWithWhereUniqueNestedInput {
+  where: JobWhereUniqueInput!
+  update: JobUpdateDataInput!
+  create: JobCreateInput!
+}
+
+input JobUpsertWithWhereUniqueWithoutCustomerInput {
+  where: JobWhereUniqueInput!
+  update: JobUpdateWithoutCustomerDataInput!
+  create: JobCreateWithoutCustomerInput!
+}
+
+input JobWhereInput {
+  """Logical AND on all given filters."""
+  AND: [JobWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [JobWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [JobWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  fields_every: FieldValueWhereInput
+  fields_some: FieldValueWhereInput
+  fields_none: FieldValueWhereInput
+  tasks_every: TaskWhereInput
+  tasks_some: TaskWhereInput
+  tasks_none: TaskWhereInput
+  customer: CustomerWhereInput
+  threads_every: ThreadWhereInput
+  threads_some: ThreadWhereInput
+  threads_none: ThreadWhereInput
+}
+
+input JobWhereUniqueInput {
+  id: ID
+}
+
+"""Raw JSON value"""
+scalar Json
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createThread(data: ThreadCreateInput!): Thread!
+  createThreadEntityValue(data: ThreadEntityValueCreateInput!): ThreadEntityValue!
+  createComment(data: CommentCreateInput!): Comment!
+  createCustomer(data: CustomerCreateInput!): Customer!
+  createTask(data: TaskCreateInput!): Task!
+  createJob(data: JobCreateInput!): Job!
+  createRole(data: RoleCreateInput!): Role!
+  createFile(data: FileCreateInput!): File!
+  createField(data: FieldCreateInput!): Field!
+  createValue(data: ValueCreateInput!): Value!
+  createFieldValue(data: FieldValueCreateInput!): FieldValue!
+  createNotification(data: NotificationCreateInput!): Notification!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateThread(data: ThreadUpdateInput!, where: ThreadWhereUniqueInput!): Thread
+  updateThreadEntityValue(data: ThreadEntityValueUpdateInput!, where: ThreadEntityValueWhereUniqueInput!): ThreadEntityValue
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateCustomer(data: CustomerUpdateInput!, where: CustomerWhereUniqueInput!): Customer
+  updateTask(data: TaskUpdateInput!, where: TaskWhereUniqueInput!): Task
+  updateJob(data: JobUpdateInput!, where: JobWhereUniqueInput!): Job
+  updateRole(data: RoleUpdateInput!, where: RoleWhereUniqueInput!): Role
+  updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
+  updateField(data: FieldUpdateInput!, where: FieldWhereUniqueInput!): Field
+  updateValue(data: ValueUpdateInput!, where: ValueWhereUniqueInput!): Value
+  updateFieldValue(data: FieldValueUpdateInput!, where: FieldValueWhereUniqueInput!): FieldValue
+  updateNotification(data: NotificationUpdateInput!, where: NotificationWhereUniqueInput!): Notification
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteThread(where: ThreadWhereUniqueInput!): Thread
+  deleteThreadEntityValue(where: ThreadEntityValueWhereUniqueInput!): ThreadEntityValue
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteCustomer(where: CustomerWhereUniqueInput!): Customer
+  deleteTask(where: TaskWhereUniqueInput!): Task
+  deleteJob(where: JobWhereUniqueInput!): Job
+  deleteRole(where: RoleWhereUniqueInput!): Role
+  deleteFile(where: FileWhereUniqueInput!): File
+  deleteField(where: FieldWhereUniqueInput!): Field
+  deleteValue(where: ValueWhereUniqueInput!): Value
+  deleteFieldValue(where: FieldValueWhereUniqueInput!): FieldValue
+  deleteNotification(where: NotificationWhereUniqueInput!): Notification
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertThread(where: ThreadWhereUniqueInput!, create: ThreadCreateInput!, update: ThreadUpdateInput!): Thread!
+  upsertThreadEntityValue(where: ThreadEntityValueWhereUniqueInput!, create: ThreadEntityValueCreateInput!, update: ThreadEntityValueUpdateInput!): ThreadEntityValue!
+  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
+  upsertCustomer(where: CustomerWhereUniqueInput!, create: CustomerCreateInput!, update: CustomerUpdateInput!): Customer!
+  upsertTask(where: TaskWhereUniqueInput!, create: TaskCreateInput!, update: TaskUpdateInput!): Task!
+  upsertJob(where: JobWhereUniqueInput!, create: JobCreateInput!, update: JobUpdateInput!): Job!
+  upsertRole(where: RoleWhereUniqueInput!, create: RoleCreateInput!, update: RoleUpdateInput!): Role!
+  upsertFile(where: FileWhereUniqueInput!, create: FileCreateInput!, update: FileUpdateInput!): File!
+  upsertField(where: FieldWhereUniqueInput!, create: FieldCreateInput!, update: FieldUpdateInput!): Field!
+  upsertValue(where: ValueWhereUniqueInput!, create: ValueCreateInput!, update: ValueUpdateInput!): Value!
+  upsertFieldValue(where: FieldValueWhereUniqueInput!, create: FieldValueCreateInput!, update: FieldValueUpdateInput!): FieldValue!
+  upsertNotification(where: NotificationWhereUniqueInput!, create: NotificationCreateInput!, update: NotificationUpdateInput!): Notification!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyThreads(data: ThreadUpdateInput!, where: ThreadWhereInput): BatchPayload!
+  updateManyThreadEntityValues(data: ThreadEntityValueUpdateInput!, where: ThreadEntityValueWhereInput): BatchPayload!
+  updateManyComments(data: CommentUpdateInput!, where: CommentWhereInput): BatchPayload!
+  updateManyCustomers(data: CustomerUpdateInput!, where: CustomerWhereInput): BatchPayload!
+  updateManyTasks(data: TaskUpdateInput!, where: TaskWhereInput): BatchPayload!
+  updateManyJobs(data: JobUpdateInput!, where: JobWhereInput): BatchPayload!
+  updateManyRoles(data: RoleUpdateInput!, where: RoleWhereInput): BatchPayload!
+  updateManyFiles(data: FileUpdateInput!, where: FileWhereInput): BatchPayload!
+  updateManyFields(data: FieldUpdateInput!, where: FieldWhereInput): BatchPayload!
+  updateManyValues(data: ValueUpdateInput!, where: ValueWhereInput): BatchPayload!
+  updateManyFieldValues(data: FieldValueUpdateInput!, where: FieldValueWhereInput): BatchPayload!
+  updateManyNotifications(data: NotificationUpdateInput!, where: NotificationWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyThreads(where: ThreadWhereInput): BatchPayload!
+  deleteManyThreadEntityValues(where: ThreadEntityValueWhereInput): BatchPayload!
+  deleteManyComments(where: CommentWhereInput): BatchPayload!
+  deleteManyCustomers(where: CustomerWhereInput): BatchPayload!
+  deleteManyTasks(where: TaskWhereInput): BatchPayload!
+  deleteManyJobs(where: JobWhereInput): BatchPayload!
+  deleteManyRoles(where: RoleWhereInput): BatchPayload!
+  deleteManyFiles(where: FileWhereInput): BatchPayload!
+  deleteManyFields(where: FieldWhereInput): BatchPayload!
+  deleteManyValues(where: ValueWhereInput): BatchPayload!
+  deleteManyFieldValues(where: FieldValueWhereInput): BatchPayload!
+  deleteManyNotifications(where: NotificationWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+type Notification implements Node {
+  id: ID!
+  read: Boolean!
+  user(where: UserWhereInput): User!
+  title: String!
+  body: String!
+  type: FieldEntity!
+  entity: ID!
+  link: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type NotificationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [NotificationEdge]!
+  aggregate: AggregateNotification!
+}
+
+input NotificationCreateInput {
+  read: Boolean
+  title: String!
+  body: String!
+  type: FieldEntity!
+  entity: ID!
+  link: String!
+  user: UserCreateOneInput!
+}
+
+"""An edge in a connection."""
+type NotificationEdge {
+  """The item at the end of the edge."""
+  node: Notification!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum NotificationOrderByInput {
+  id_ASC
+  id_DESC
+  read_ASC
+  read_DESC
+  title_ASC
+  title_DESC
+  body_ASC
+  body_DESC
+  type_ASC
+  type_DESC
+  entity_ASC
+  entity_DESC
+  link_ASC
+  link_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type NotificationPreviousValues {
+  id: ID!
+  read: Boolean!
+  title: String!
+  body: String!
+  type: FieldEntity!
+  entity: ID!
+  link: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type NotificationSubscriptionPayload {
+  mutation: MutationType!
+  node: Notification
+  updatedFields: [String!]
+  previousValues: NotificationPreviousValues
+}
+
+input NotificationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [NotificationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [NotificationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [NotificationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: NotificationWhereInput
+}
+
+input NotificationUpdateInput {
+  read: Boolean
+  title: String
+  body: String
+  type: FieldEntity
+  entity: ID
+  link: String
+  user: UserUpdateOneInput
+}
+
+input NotificationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [NotificationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [NotificationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [NotificationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  read: Boolean
+
+  """All values that are not equal to given value."""
+  read_not: Boolean
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  body: String
+
+  """All values that are not equal to given value."""
+  body_not: String
+
+  """All values that are contained in given list."""
+  body_in: [String!]
+
+  """All values that are not contained in given list."""
+  body_not_in: [String!]
+
+  """All values less than the given value."""
+  body_lt: String
+
+  """All values less than or equal the given value."""
+  body_lte: String
+
+  """All values greater than the given value."""
+  body_gt: String
+
+  """All values greater than or equal the given value."""
+  body_gte: String
+
+  """All values containing the given string."""
+  body_contains: String
+
+  """All values not containing the given string."""
+  body_not_contains: String
+
+  """All values starting with the given string."""
+  body_starts_with: String
+
+  """All values not starting with the given string."""
+  body_not_starts_with: String
+
+  """All values ending with the given string."""
+  body_ends_with: String
+
+  """All values not ending with the given string."""
+  body_not_ends_with: String
+  type: FieldEntity
+
+  """All values that are not equal to given value."""
+  type_not: FieldEntity
+
+  """All values that are contained in given list."""
+  type_in: [FieldEntity!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [FieldEntity!]
+  entity: ID
+
+  """All values that are not equal to given value."""
+  entity_not: ID
+
+  """All values that are contained in given list."""
+  entity_in: [ID!]
+
+  """All values that are not contained in given list."""
+  entity_not_in: [ID!]
+
+  """All values less than the given value."""
+  entity_lt: ID
+
+  """All values less than or equal the given value."""
+  entity_lte: ID
+
+  """All values greater than the given value."""
+  entity_gt: ID
+
+  """All values greater than or equal the given value."""
+  entity_gte: ID
+
+  """All values containing the given string."""
+  entity_contains: ID
+
+  """All values not containing the given string."""
+  entity_not_contains: ID
+
+  """All values starting with the given string."""
+  entity_starts_with: ID
+
+  """All values not starting with the given string."""
+  entity_not_starts_with: ID
+
+  """All values ending with the given string."""
+  entity_ends_with: ID
+
+  """All values not ending with the given string."""
+  entity_not_ends_with: ID
+  link: String
+
+  """All values that are not equal to given value."""
+  link_not: String
+
+  """All values that are contained in given list."""
+  link_in: [String!]
+
+  """All values that are not contained in given list."""
+  link_not_in: [String!]
+
+  """All values less than the given value."""
+  link_lt: String
+
+  """All values less than or equal the given value."""
+  link_lte: String
+
+  """All values greater than the given value."""
+  link_gt: String
+
+  """All values greater than or equal the given value."""
+  link_gte: String
+
+  """All values containing the given string."""
+  link_contains: String
+
+  """All values not containing the given string."""
+  link_not_contains: String
+
+  """All values starting with the given string."""
+  link_starts_with: String
+
+  """All values not starting with the given string."""
+  link_not_starts_with: String
+
+  """All values ending with the given string."""
+  link_ends_with: String
+
+  """All values not ending with the given string."""
+  link_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  user: UserWhereInput
+}
+
+input NotificationWhereUniqueInput {
+  id: ID
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  threads(where: ThreadWhereInput, orderBy: ThreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Thread]!
+  threadEntityValues(where: ThreadEntityValueWhereInput, orderBy: ThreadEntityValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ThreadEntityValue]!
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
+  customers(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Customer]!
+  tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task]!
+  jobs(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Job]!
+  roles(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role]!
+  files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
+  fields(where: FieldWhereInput, orderBy: FieldOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Field]!
+  values(where: ValueWhereInput, orderBy: ValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Value]!
+  fieldValues(where: FieldValueWhereInput, orderBy: FieldValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FieldValue]!
+  notifications(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification]!
+  user(where: UserWhereUniqueInput!): User
+  thread(where: ThreadWhereUniqueInput!): Thread
+  threadEntityValue(where: ThreadEntityValueWhereUniqueInput!): ThreadEntityValue
+  comment(where: CommentWhereUniqueInput!): Comment
+  customer(where: CustomerWhereUniqueInput!): Customer
+  task(where: TaskWhereUniqueInput!): Task
+  job(where: JobWhereUniqueInput!): Job
+  role(where: RoleWhereUniqueInput!): Role
+  file(where: FileWhereUniqueInput!): File
+  field(where: FieldWhereUniqueInput!): Field
+  value(where: ValueWhereUniqueInput!): Value
+  fieldValue(where: FieldValueWhereUniqueInput!): FieldValue
+  notification(where: NotificationWhereUniqueInput!): Notification
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  threadsConnection(where: ThreadWhereInput, orderBy: ThreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ThreadConnection!
+  threadEntityValuesConnection(where: ThreadEntityValueWhereInput, orderBy: ThreadEntityValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ThreadEntityValueConnection!
+  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
+  customersConnection(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CustomerConnection!
+  tasksConnection(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TaskConnection!
+  jobsConnection(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): JobConnection!
+  rolesConnection(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection!
+  filesConnection(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
+  fieldsConnection(where: FieldWhereInput, orderBy: FieldOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FieldConnection!
+  valuesConnection(where: ValueWhereInput, orderBy: ValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ValueConnection!
+  fieldValuesConnection(where: FieldValueWhereInput, orderBy: FieldValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FieldValueConnection!
+  notificationsConnection(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NotificationConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Role implements Node {
+  id: ID!
+  name: String!
+  type: String!
+  permissions: Json!
+  read(where: FieldWhereInput, orderBy: FieldOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Field!]
+  write(where: FieldWhereInput, orderBy: FieldOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Field!]
+}
+
+"""A connection to a list of items."""
+type RoleConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [RoleEdge]!
+  aggregate: AggregateRole!
+}
+
+input RoleCreateInput {
+  name: String!
+  type: String!
+  permissions: Json!
+  read: FieldCreateManyInput
+  write: FieldCreateManyInput
+}
+
+input RoleCreateManyInput {
+  create: [RoleCreateInput!]
+  connect: [RoleWhereUniqueInput!]
+}
+
+input RoleCreateOneInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type RoleEdge {
+  """The item at the end of the edge."""
+  node: Role!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum RoleOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  type_ASC
+  type_DESC
+  permissions_ASC
+  permissions_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type RolePreviousValues {
+  id: ID!
+  name: String!
+  type: String!
+  permissions: Json!
+}
+
+type RoleSubscriptionPayload {
+  mutation: MutationType!
+  node: Role
+  updatedFields: [String!]
+  previousValues: RolePreviousValues
+}
+
+input RoleSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RoleSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RoleSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RoleSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: RoleWhereInput
+}
+
+input RoleUpdateDataInput {
+  name: String
+  type: String
+  permissions: Json
+  read: FieldUpdateManyInput
+  write: FieldUpdateManyInput
+}
+
+input RoleUpdateInput {
+  name: String
+  type: String
+  permissions: Json
+  read: FieldUpdateManyInput
+  write: FieldUpdateManyInput
+}
+
+input RoleUpdateManyInput {
+  create: [RoleCreateInput!]
+  connect: [RoleWhereUniqueInput!]
+  disconnect: [RoleWhereUniqueInput!]
+  delete: [RoleWhereUniqueInput!]
+  update: [RoleUpdateWithWhereUniqueNestedInput!]
+  upsert: [RoleUpsertWithWhereUniqueNestedInput!]
+}
+
+input RoleUpdateOneInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+  delete: Boolean
+  update: RoleUpdateDataInput
+  upsert: RoleUpsertNestedInput
+}
+
+input RoleUpdateWithWhereUniqueNestedInput {
+  where: RoleWhereUniqueInput!
+  data: RoleUpdateDataInput!
+}
+
+input RoleUpsertNestedInput {
+  update: RoleUpdateDataInput!
+  create: RoleCreateInput!
+}
+
+input RoleUpsertWithWhereUniqueNestedInput {
+  where: RoleWhereUniqueInput!
+  update: RoleUpdateDataInput!
+  create: RoleCreateInput!
+}
+
+input RoleWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RoleWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RoleWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RoleWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: String
+
+  """All values that are not equal to given value."""
+  type_not: String
+
+  """All values that are contained in given list."""
+  type_in: [String!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
+
+  """All values less than the given value."""
+  type_lt: String
+
+  """All values less than or equal the given value."""
+  type_lte: String
+
+  """All values greater than the given value."""
+  type_gt: String
+
+  """All values greater than or equal the given value."""
+  type_gte: String
+
+  """All values containing the given string."""
+  type_contains: String
+
+  """All values not containing the given string."""
+  type_not_contains: String
+
+  """All values starting with the given string."""
+  type_starts_with: String
+
+  """All values not starting with the given string."""
+  type_not_starts_with: String
+
+  """All values ending with the given string."""
+  type_ends_with: String
+
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  read_every: FieldWhereInput
+  read_some: FieldWhereInput
+  read_none: FieldWhereInput
+  write_every: FieldWhereInput
+  write_some: FieldWhereInput
+  write_none: FieldWhereInput
+}
+
+input RoleWhereUniqueInput {
+  id: ID
+  name: String
+  type: String
+}
+
+type Subscription {
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  thread(where: ThreadSubscriptionWhereInput): ThreadSubscriptionPayload
+  threadEntityValue(where: ThreadEntityValueSubscriptionWhereInput): ThreadEntityValueSubscriptionPayload
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+  customer(where: CustomerSubscriptionWhereInput): CustomerSubscriptionPayload
+  task(where: TaskSubscriptionWhereInput): TaskSubscriptionPayload
+  job(where: JobSubscriptionWhereInput): JobSubscriptionPayload
+  role(where: RoleSubscriptionWhereInput): RoleSubscriptionPayload
+  file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
+  field(where: FieldSubscriptionWhereInput): FieldSubscriptionPayload
+  value(where: ValueSubscriptionWhereInput): ValueSubscriptionPayload
+  fieldValue(where: FieldValueSubscriptionWhereInput): FieldValueSubscriptionPayload
+  notification(where: NotificationSubscriptionWhereInput): NotificationSubscriptionPayload
+}
+
+type Task implements Node {
+  id: ID!
+  fields(where: FieldValueWhereInput, orderBy: FieldValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FieldValue!]
+  job(where: JobWhereInput): Job
+  user(where: UserWhereInput): User
+  customer(where: CustomerWhereInput): Customer
+  threads(where: ThreadWhereInput, orderBy: ThreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Thread!]
+}
+
+"""A connection to a list of items."""
+type TaskConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TaskEdge]!
+  aggregate: AggregateTask!
+}
+
+input TaskCreateInput {
+  fields: FieldValueCreateManyInput
+  job: JobCreateOneInput
+  user: UserCreateOneWithoutTasksInput
+  customer: CustomerCreateOneWithoutTasksInput
+  threads: ThreadCreateManyInput
+}
+
+input TaskCreateManyInput {
+  create: [TaskCreateInput!]
+  connect: [TaskWhereUniqueInput!]
+}
+
+input TaskCreateManyWithoutCustomerInput {
+  create: [TaskCreateWithoutCustomerInput!]
+  connect: [TaskWhereUniqueInput!]
+}
+
+input TaskCreateManyWithoutUserInput {
+  create: [TaskCreateWithoutUserInput!]
+  connect: [TaskWhereUniqueInput!]
+}
+
+input TaskCreateOneInput {
+  create: TaskCreateInput
+  connect: TaskWhereUniqueInput
+}
+
+input TaskCreateWithoutCustomerInput {
+  fields: FieldValueCreateManyInput
+  job: JobCreateOneInput
+  user: UserCreateOneWithoutTasksInput
+  threads: ThreadCreateManyInput
+}
+
+input TaskCreateWithoutUserInput {
+  fields: FieldValueCreateManyInput
+  job: JobCreateOneInput
+  customer: CustomerCreateOneWithoutTasksInput
+  threads: ThreadCreateManyInput
+}
+
+"""An edge in a connection."""
+type TaskEdge {
+  """The item at the end of the edge."""
+  node: Task!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum TaskOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type TaskPreviousValues {
+  id: ID!
+}
+
+type TaskSubscriptionPayload {
+  mutation: MutationType!
+  node: Task
+  updatedFields: [String!]
+  previousValues: TaskPreviousValues
+}
+
+input TaskSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TaskSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TaskSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TaskSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: TaskWhereInput
+}
+
+input TaskUpdateDataInput {
+  fields: FieldValueUpdateManyInput
+  job: JobUpdateOneInput
+  user: UserUpdateOneWithoutTasksInput
+  customer: CustomerUpdateOneWithoutTasksInput
+  threads: ThreadUpdateManyInput
+}
+
+input TaskUpdateInput {
+  fields: FieldValueUpdateManyInput
+  job: JobUpdateOneInput
+  user: UserUpdateOneWithoutTasksInput
+  customer: CustomerUpdateOneWithoutTasksInput
+  threads: ThreadUpdateManyInput
+}
+
+input TaskUpdateManyInput {
+  create: [TaskCreateInput!]
+  connect: [TaskWhereUniqueInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  delete: [TaskWhereUniqueInput!]
+  update: [TaskUpdateWithWhereUniqueNestedInput!]
+  upsert: [TaskUpsertWithWhereUniqueNestedInput!]
+}
+
+input TaskUpdateManyWithoutCustomerInput {
+  create: [TaskCreateWithoutCustomerInput!]
+  connect: [TaskWhereUniqueInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  delete: [TaskWhereUniqueInput!]
+  update: [TaskUpdateWithWhereUniqueWithoutCustomerInput!]
+  upsert: [TaskUpsertWithWhereUniqueWithoutCustomerInput!]
+}
+
+input TaskUpdateManyWithoutUserInput {
+  create: [TaskCreateWithoutUserInput!]
+  connect: [TaskWhereUniqueInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  delete: [TaskWhereUniqueInput!]
+  update: [TaskUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [TaskUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input TaskUpdateOneInput {
+  create: TaskCreateInput
+  connect: TaskWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: TaskUpdateDataInput
+  upsert: TaskUpsertNestedInput
+}
+
+input TaskUpdateWithoutCustomerDataInput {
+  fields: FieldValueUpdateManyInput
+  job: JobUpdateOneInput
+  user: UserUpdateOneWithoutTasksInput
+  threads: ThreadUpdateManyInput
+}
+
+input TaskUpdateWithoutUserDataInput {
+  fields: FieldValueUpdateManyInput
+  job: JobUpdateOneInput
+  customer: CustomerUpdateOneWithoutTasksInput
+  threads: ThreadUpdateManyInput
+}
+
+input TaskUpdateWithWhereUniqueNestedInput {
+  where: TaskWhereUniqueInput!
+  data: TaskUpdateDataInput!
+}
+
+input TaskUpdateWithWhereUniqueWithoutCustomerInput {
+  where: TaskWhereUniqueInput!
+  data: TaskUpdateWithoutCustomerDataInput!
+}
+
+input TaskUpdateWithWhereUniqueWithoutUserInput {
+  where: TaskWhereUniqueInput!
+  data: TaskUpdateWithoutUserDataInput!
+}
+
+input TaskUpsertNestedInput {
+  update: TaskUpdateDataInput!
+  create: TaskCreateInput!
+}
+
+input TaskUpsertWithWhereUniqueNestedInput {
+  where: TaskWhereUniqueInput!
+  update: TaskUpdateDataInput!
+  create: TaskCreateInput!
+}
+
+input TaskUpsertWithWhereUniqueWithoutCustomerInput {
+  where: TaskWhereUniqueInput!
+  update: TaskUpdateWithoutCustomerDataInput!
+  create: TaskCreateWithoutCustomerInput!
+}
+
+input TaskUpsertWithWhereUniqueWithoutUserInput {
+  where: TaskWhereUniqueInput!
+  update: TaskUpdateWithoutUserDataInput!
+  create: TaskCreateWithoutUserInput!
+}
+
+input TaskWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TaskWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TaskWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TaskWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  fields_every: FieldValueWhereInput
+  fields_some: FieldValueWhereInput
+  fields_none: FieldValueWhereInput
+  job: JobWhereInput
+  user: UserWhereInput
+  customer: CustomerWhereInput
+  threads_every: ThreadWhereInput
+  threads_some: ThreadWhereInput
+  threads_none: ThreadWhereInput
+}
+
+input TaskWhereUniqueInput {
+  id: ID
+}
+
+type Thread implements Node {
+  id: ID!
+  type: FieldEntity!
+  entity(where: ThreadEntityValueWhereInput): ThreadEntityValue!
+  title: String
+  author(where: UserWhereInput): User!
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type ThreadConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ThreadEdge]!
+  aggregate: AggregateThread!
+}
+
+input ThreadCreateInput {
+  type: FieldEntity!
+  title: String
+  entity: ThreadEntityValueCreateOneInput!
+  author: UserCreateOneInput!
+  comments: CommentCreateManyWithoutThreadInput
+}
+
+input ThreadCreateManyInput {
+  create: [ThreadCreateInput!]
+  connect: [ThreadWhereUniqueInput!]
+}
+
+input ThreadCreateOneWithoutCommentsInput {
+  create: ThreadCreateWithoutCommentsInput
+  connect: ThreadWhereUniqueInput
+}
+
+input ThreadCreateWithoutCommentsInput {
+  type: FieldEntity!
+  title: String
+  entity: ThreadEntityValueCreateOneInput!
+  author: UserCreateOneInput!
+}
+
+"""An edge in a connection."""
+type ThreadEdge {
+  """The item at the end of the edge."""
+  node: Thread!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+type ThreadEntityValue implements Node {
+  id: ID!
+  JOB(where: JobWhereInput): Job
+  TASK(where: TaskWhereInput): Task
+  USER(where: UserWhereInput): User
+  CUSTOMER(where: CustomerWhereInput): Customer
+}
+
+"""A connection to a list of items."""
+type ThreadEntityValueConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ThreadEntityValueEdge]!
+  aggregate: AggregateThreadEntityValue!
+}
+
+input ThreadEntityValueCreateInput {
+  JOB: JobCreateOneInput
+  TASK: TaskCreateOneInput
+  USER: UserCreateOneInput
+  CUSTOMER: CustomerCreateOneInput
+}
+
+input ThreadEntityValueCreateOneInput {
+  create: ThreadEntityValueCreateInput
+  connect: ThreadEntityValueWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type ThreadEntityValueEdge {
+  """The item at the end of the edge."""
+  node: ThreadEntityValue!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ThreadEntityValueOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ThreadEntityValuePreviousValues {
+  id: ID!
+}
+
+type ThreadEntityValueSubscriptionPayload {
+  mutation: MutationType!
+  node: ThreadEntityValue
+  updatedFields: [String!]
+  previousValues: ThreadEntityValuePreviousValues
+}
+
+input ThreadEntityValueSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ThreadEntityValueSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ThreadEntityValueSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ThreadEntityValueSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ThreadEntityValueWhereInput
+}
+
+input ThreadEntityValueUpdateDataInput {
+  JOB: JobUpdateOneInput
+  TASK: TaskUpdateOneInput
+  USER: UserUpdateOneInput
+  CUSTOMER: CustomerUpdateOneInput
+}
+
+input ThreadEntityValueUpdateInput {
+  JOB: JobUpdateOneInput
+  TASK: TaskUpdateOneInput
+  USER: UserUpdateOneInput
+  CUSTOMER: CustomerUpdateOneInput
+}
+
+input ThreadEntityValueUpdateOneInput {
+  create: ThreadEntityValueCreateInput
+  connect: ThreadEntityValueWhereUniqueInput
+  delete: Boolean
+  update: ThreadEntityValueUpdateDataInput
+  upsert: ThreadEntityValueUpsertNestedInput
+}
+
+input ThreadEntityValueUpsertNestedInput {
+  update: ThreadEntityValueUpdateDataInput!
+  create: ThreadEntityValueCreateInput!
+}
+
+input ThreadEntityValueWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ThreadEntityValueWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ThreadEntityValueWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ThreadEntityValueWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  JOB: JobWhereInput
+  TASK: TaskWhereInput
+  USER: UserWhereInput
+  CUSTOMER: CustomerWhereInput
+}
+
+input ThreadEntityValueWhereUniqueInput {
+  id: ID
+}
+
+enum ThreadOrderByInput {
+  id_ASC
+  id_DESC
+  type_ASC
+  type_DESC
+  title_ASC
+  title_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ThreadPreviousValues {
+  id: ID!
+  type: FieldEntity!
+  title: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ThreadSubscriptionPayload {
+  mutation: MutationType!
+  node: Thread
+  updatedFields: [String!]
+  previousValues: ThreadPreviousValues
+}
+
+input ThreadSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ThreadSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ThreadSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ThreadSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ThreadWhereInput
+}
+
+input ThreadUpdateDataInput {
+  type: FieldEntity
+  title: String
+  entity: ThreadEntityValueUpdateOneInput
+  author: UserUpdateOneInput
+  comments: CommentUpdateManyWithoutThreadInput
+}
+
+input ThreadUpdateInput {
+  type: FieldEntity
+  title: String
+  entity: ThreadEntityValueUpdateOneInput
+  author: UserUpdateOneInput
+  comments: CommentUpdateManyWithoutThreadInput
+}
+
+input ThreadUpdateManyInput {
+  create: [ThreadCreateInput!]
+  connect: [ThreadWhereUniqueInput!]
+  disconnect: [ThreadWhereUniqueInput!]
+  delete: [ThreadWhereUniqueInput!]
+  update: [ThreadUpdateWithWhereUniqueNestedInput!]
+  upsert: [ThreadUpsertWithWhereUniqueNestedInput!]
+}
+
+input ThreadUpdateOneWithoutCommentsInput {
+  create: ThreadCreateWithoutCommentsInput
+  connect: ThreadWhereUniqueInput
+  delete: Boolean
+  update: ThreadUpdateWithoutCommentsDataInput
+  upsert: ThreadUpsertWithoutCommentsInput
+}
+
+input ThreadUpdateWithoutCommentsDataInput {
+  type: FieldEntity
+  title: String
+  entity: ThreadEntityValueUpdateOneInput
+  author: UserUpdateOneInput
+}
+
+input ThreadUpdateWithWhereUniqueNestedInput {
+  where: ThreadWhereUniqueInput!
+  data: ThreadUpdateDataInput!
+}
+
+input ThreadUpsertWithoutCommentsInput {
+  update: ThreadUpdateWithoutCommentsDataInput!
+  create: ThreadCreateWithoutCommentsInput!
+}
+
+input ThreadUpsertWithWhereUniqueNestedInput {
+  where: ThreadWhereUniqueInput!
+  update: ThreadUpdateDataInput!
+  create: ThreadCreateInput!
+}
+
+input ThreadWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ThreadWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ThreadWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ThreadWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  type: FieldEntity
+
+  """All values that are not equal to given value."""
+  type_not: FieldEntity
+
+  """All values that are contained in given list."""
+  type_in: [FieldEntity!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [FieldEntity!]
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  entity: ThreadEntityValueWhereInput
+  author: UserWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
+}
+
+input ThreadWhereUniqueInput {
+  id: ID
+}
+
+type User implements Node {
+  id: ID!
+  username: String!
+  password: String!
+  role(where: RoleWhereInput): Role!
+  jobs(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Job!]
+  tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
+  fields(where: FieldValueWhereInput, orderBy: FieldValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FieldValue!]
+  threads(where: ThreadWhereInput, orderBy: ThreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Thread!]
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  username: String!
+  password: String!
+  role: RoleCreateOneInput!
+  jobs: JobCreateManyInput
+  tasks: TaskCreateManyWithoutUserInput
+  fields: FieldValueCreateManyInput
+  threads: ThreadCreateManyInput
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutTasksInput {
+  create: UserCreateWithoutTasksInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutTasksInput {
+  username: String!
+  password: String!
+  role: RoleCreateOneInput!
+  jobs: JobCreateManyInput
+  fields: FieldValueCreateManyInput
+  threads: ThreadCreateManyInput
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  username_ASC
+  username_DESC
+  password_ASC
+  password_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  username: String!
+  password: String!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateDataInput {
+  username: String
+  password: String
+  role: RoleUpdateOneInput
+  jobs: JobUpdateManyInput
+  tasks: TaskUpdateManyWithoutUserInput
+  fields: FieldValueUpdateManyInput
+  threads: ThreadUpdateManyInput
+}
+
+input UserUpdateInput {
+  username: String
+  password: String
+  role: RoleUpdateOneInput
+  jobs: JobUpdateManyInput
+  tasks: TaskUpdateManyWithoutUserInput
+  fields: FieldValueUpdateManyInput
+  threads: ThreadUpdateManyInput
+}
+
+input UserUpdateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+}
+
+input UserUpdateOneWithoutTasksInput {
+  create: UserCreateWithoutTasksInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateWithoutTasksDataInput
+  upsert: UserUpsertWithoutTasksInput
+}
+
+input UserUpdateWithoutTasksDataInput {
+  username: String
+  password: String
+  role: RoleUpdateOneInput
+  jobs: JobUpdateManyInput
+  fields: FieldValueUpdateManyInput
+  threads: ThreadUpdateManyInput
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithoutTasksInput {
+  update: UserUpdateWithoutTasksDataInput!
+  create: UserCreateWithoutTasksInput!
+}
+
+input UserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  username: String
+
+  """All values that are not equal to given value."""
+  username_not: String
+
+  """All values that are contained in given list."""
+  username_in: [String!]
+
+  """All values that are not contained in given list."""
+  username_not_in: [String!]
+
+  """All values less than the given value."""
+  username_lt: String
+
+  """All values less than or equal the given value."""
+  username_lte: String
+
+  """All values greater than the given value."""
+  username_gt: String
+
+  """All values greater than or equal the given value."""
+  username_gte: String
+
+  """All values containing the given string."""
+  username_contains: String
+
+  """All values not containing the given string."""
+  username_not_contains: String
+
+  """All values starting with the given string."""
+  username_starts_with: String
+
+  """All values not starting with the given string."""
+  username_not_starts_with: String
+
+  """All values ending with the given string."""
+  username_ends_with: String
+
+  """All values not ending with the given string."""
+  username_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  role: RoleWhereInput
+  jobs_every: JobWhereInput
+  jobs_some: JobWhereInput
+  jobs_none: JobWhereInput
+  tasks_every: TaskWhereInput
+  tasks_some: TaskWhereInput
+  tasks_none: TaskWhereInput
+  fields_every: FieldValueWhereInput
+  fields_some: FieldValueWhereInput
+  fields_none: FieldValueWhereInput
+  threads_every: ThreadWhereInput
+  threads_some: ThreadWhereInput
+  threads_none: ThreadWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  username: String
+}
+
+type Value implements Node {
+  id: ID!
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOAD(where: FileWhereInput): File
+  UPLOADS(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File!]
+}
+
+"""A connection to a list of items."""
+type ValueConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ValueEdge]!
+  aggregate: AggregateValue!
+}
+
+input ValueCreateInput {
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOAD: FileCreateOneWithoutValueInput
+  UPLOADS: FileCreateManyWithoutValuesInput
+}
+
+input ValueCreateOneInput {
+  create: ValueCreateInput
+  connect: ValueWhereUniqueInput
+}
+
+input ValueCreateOneWithoutUPLOADInput {
+  create: ValueCreateWithoutUPLOADInput
+  connect: ValueWhereUniqueInput
+}
+
+input ValueCreateOneWithoutUPLOADSInput {
+  create: ValueCreateWithoutUPLOADSInput
+  connect: ValueWhereUniqueInput
+}
+
+input ValueCreateWithoutUPLOADInput {
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOADS: FileCreateManyWithoutValuesInput
+}
+
+input ValueCreateWithoutUPLOADSInput {
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOAD: FileCreateOneWithoutValueInput
+}
+
+"""An edge in a connection."""
+type ValueEdge {
+  """The item at the end of the edge."""
+  node: Value!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ValueOrderByInput {
+  id_ASC
+  id_DESC
+  TEXT_ASC
+  TEXT_DESC
+  LONGTEXT_ASC
+  LONGTEXT_DESC
+  NUMBER_ASC
+  NUMBER_DESC
+  CURRENCY_ASC
+  CURRENCY_DESC
+  SELECT_ASC
+  SELECT_DESC
+  DATE_ASC
+  DATE_DESC
+  YESNO_ASC
+  YESNO_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ValuePreviousValues {
+  id: ID!
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+}
+
+type ValueSubscriptionPayload {
+  mutation: MutationType!
+  node: Value
+  updatedFields: [String!]
+  previousValues: ValuePreviousValues
+}
+
+input ValueSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ValueSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ValueSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ValueSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ValueWhereInput
+}
+
+input ValueUpdateDataInput {
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOAD: FileUpdateOneWithoutValueInput
+  UPLOADS: FileUpdateManyWithoutValuesInput
+}
+
+input ValueUpdateInput {
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOAD: FileUpdateOneWithoutValueInput
+  UPLOADS: FileUpdateManyWithoutValuesInput
+}
+
+input ValueUpdateOneInput {
+  create: ValueCreateInput
+  connect: ValueWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ValueUpdateDataInput
+  upsert: ValueUpsertNestedInput
+}
+
+input ValueUpdateOneWithoutUPLOADInput {
+  create: ValueCreateWithoutUPLOADInput
+  connect: ValueWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ValueUpdateWithoutUPLOADDataInput
+  upsert: ValueUpsertWithoutUPLOADInput
+}
+
+input ValueUpdateOneWithoutUPLOADSInput {
+  create: ValueCreateWithoutUPLOADSInput
+  connect: ValueWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ValueUpdateWithoutUPLOADSDataInput
+  upsert: ValueUpsertWithoutUPLOADSInput
+}
+
+input ValueUpdateWithoutUPLOADDataInput {
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOADS: FileUpdateManyWithoutValuesInput
+}
+
+input ValueUpdateWithoutUPLOADSDataInput {
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOAD: FileUpdateOneWithoutValueInput
+}
+
+input ValueUpsertNestedInput {
+  update: ValueUpdateDataInput!
+  create: ValueCreateInput!
+}
+
+input ValueUpsertWithoutUPLOADInput {
+  update: ValueUpdateWithoutUPLOADDataInput!
+  create: ValueCreateWithoutUPLOADInput!
+}
+
+input ValueUpsertWithoutUPLOADSInput {
+  update: ValueUpdateWithoutUPLOADSDataInput!
+  create: ValueCreateWithoutUPLOADSInput!
+}
+
+input ValueWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ValueWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ValueWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ValueWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  TEXT: String
+
+  """All values that are not equal to given value."""
+  TEXT_not: String
+
+  """All values that are contained in given list."""
+  TEXT_in: [String!]
+
+  """All values that are not contained in given list."""
+  TEXT_not_in: [String!]
+
+  """All values less than the given value."""
+  TEXT_lt: String
+
+  """All values less than or equal the given value."""
+  TEXT_lte: String
+
+  """All values greater than the given value."""
+  TEXT_gt: String
+
+  """All values greater than or equal the given value."""
+  TEXT_gte: String
+
+  """All values containing the given string."""
+  TEXT_contains: String
+
+  """All values not containing the given string."""
+  TEXT_not_contains: String
+
+  """All values starting with the given string."""
+  TEXT_starts_with: String
+
+  """All values not starting with the given string."""
+  TEXT_not_starts_with: String
+
+  """All values ending with the given string."""
+  TEXT_ends_with: String
+
+  """All values not ending with the given string."""
+  TEXT_not_ends_with: String
+  LONGTEXT: String
+
+  """All values that are not equal to given value."""
+  LONGTEXT_not: String
+
+  """All values that are contained in given list."""
+  LONGTEXT_in: [String!]
+
+  """All values that are not contained in given list."""
+  LONGTEXT_not_in: [String!]
+
+  """All values less than the given value."""
+  LONGTEXT_lt: String
+
+  """All values less than or equal the given value."""
+  LONGTEXT_lte: String
+
+  """All values greater than the given value."""
+  LONGTEXT_gt: String
+
+  """All values greater than or equal the given value."""
+  LONGTEXT_gte: String
+
+  """All values containing the given string."""
+  LONGTEXT_contains: String
+
+  """All values not containing the given string."""
+  LONGTEXT_not_contains: String
+
+  """All values starting with the given string."""
+  LONGTEXT_starts_with: String
+
+  """All values not starting with the given string."""
+  LONGTEXT_not_starts_with: String
+
+  """All values ending with the given string."""
+  LONGTEXT_ends_with: String
+
+  """All values not ending with the given string."""
+  LONGTEXT_not_ends_with: String
+  NUMBER: Float
+
+  """All values that are not equal to given value."""
+  NUMBER_not: Float
+
+  """All values that are contained in given list."""
+  NUMBER_in: [Float!]
+
+  """All values that are not contained in given list."""
+  NUMBER_not_in: [Float!]
+
+  """All values less than the given value."""
+  NUMBER_lt: Float
+
+  """All values less than or equal the given value."""
+  NUMBER_lte: Float
+
+  """All values greater than the given value."""
+  NUMBER_gt: Float
+
+  """All values greater than or equal the given value."""
+  NUMBER_gte: Float
+  CURRENCY: Float
+
+  """All values that are not equal to given value."""
+  CURRENCY_not: Float
+
+  """All values that are contained in given list."""
+  CURRENCY_in: [Float!]
+
+  """All values that are not contained in given list."""
+  CURRENCY_not_in: [Float!]
+
+  """All values less than the given value."""
+  CURRENCY_lt: Float
+
+  """All values less than or equal the given value."""
+  CURRENCY_lte: Float
+
+  """All values greater than the given value."""
+  CURRENCY_gt: Float
+
+  """All values greater than or equal the given value."""
+  CURRENCY_gte: Float
+  SELECT: String
+
+  """All values that are not equal to given value."""
+  SELECT_not: String
+
+  """All values that are contained in given list."""
+  SELECT_in: [String!]
+
+  """All values that are not contained in given list."""
+  SELECT_not_in: [String!]
+
+  """All values less than the given value."""
+  SELECT_lt: String
+
+  """All values less than or equal the given value."""
+  SELECT_lte: String
+
+  """All values greater than the given value."""
+  SELECT_gt: String
+
+  """All values greater than or equal the given value."""
+  SELECT_gte: String
+
+  """All values containing the given string."""
+  SELECT_contains: String
+
+  """All values not containing the given string."""
+  SELECT_not_contains: String
+
+  """All values starting with the given string."""
+  SELECT_starts_with: String
+
+  """All values not starting with the given string."""
+  SELECT_not_starts_with: String
+
+  """All values ending with the given string."""
+  SELECT_ends_with: String
+
+  """All values not ending with the given string."""
+  SELECT_not_ends_with: String
+  DATE: DateTime
+
+  """All values that are not equal to given value."""
+  DATE_not: DateTime
+
+  """All values that are contained in given list."""
+  DATE_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  DATE_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  DATE_lt: DateTime
+
+  """All values less than or equal the given value."""
+  DATE_lte: DateTime
+
+  """All values greater than the given value."""
+  DATE_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  DATE_gte: DateTime
+  YESNO: Boolean
+
+  """All values that are not equal to given value."""
+  YESNO_not: Boolean
+  UPLOAD: FileWhereInput
+  UPLOADS_every: FileWhereInput
+  UPLOADS_some: FileWhereInput
+  UPLOADS_none: FileWhereInput
+}
+
+input ValueWhereUniqueInput {
+  id: ID
+}

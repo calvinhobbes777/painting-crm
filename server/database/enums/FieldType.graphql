@@ -1,0 +1,11 @@
+enum FieldType {
+  TEXT
+  LONGTEXT
+  NUMBER
+  CURRENCY
+  SELECT
+  DATE
+  YESNO
+  UPLOAD
+  UPLOADS
+}

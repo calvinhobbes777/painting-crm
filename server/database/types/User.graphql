@@ -1,0 +1,10 @@
+type User {
+  id: ID! @unique
+  username: String! @unique
+  password: String!
+  role: Role!
+  jobs: [Job!]! @relation(name: "UserJobRelation", onDelete: SET_NULL)
+  tasks: [Task!]! @relation(name: "UserTaskRelation", onDelete: SET_NULL)
+  fields: [FieldValue!]! @relation(name: "UserFieldValue", onDelete: SET_NULL)
+  threads: [Thread!]! @relation(name: "UserThreadRelation", onDelete: SET_NULL)
+}

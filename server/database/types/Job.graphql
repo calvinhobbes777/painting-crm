@@ -1,0 +1,8 @@
+# Job
+type Job {
+  id: ID! @unique
+  fields: [FieldValue!]! @relation(name: "JobFieldValue", onDelete: SET_NULL)
+  tasks: [Task!]! @relation(name: "JobTaskRelation", onDelete: SET_NULL)
+  customer: Customer @relation(name: "CustomerJobRelation", onDelete: SET_NULL)
+  threads: [Thread!]! @relation(name: "JobThreadRelation", onDelete: SET_NULL)
+}

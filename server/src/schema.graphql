@@ -1,0 +1,201 @@
+# import PrismaSchema from "./generated/prisma.graphql"
+
+type Query {
+  # THREADS
+
+  file(id: ID!): File!
+  files(page: Int, size: Int): [File!]!
+  fileCount(value: String): Int!
+  fileSearch(page: Int, size: Int, value: String): [File!]!
+
+  thread(id: ID!): Thread!
+  threads(page: Int, size: Int): [Thread!]!
+  # JOB
+  job(id: ID!): Job!
+  jobs(page: Int, size: Int): [Job!]!
+  jobCount(fields: [FieldInput!], value: String): Int!
+  jobSearch(page: Int, size: Int, fields: [FieldInput!], value: String): [Job!]!
+
+  # NOTIFICATIONS
+  notifications(page: Int, size: Int, where: NotificationWhereInput): [Notification!]
+  notificationCount(id: ID, username:String): Int!
+
+  # USER
+  me: User
+  user(id: ID, username: String): User!
+  users(page: Int, size: Int): [User!]!
+  userCount(
+    fields: [FieldInput!]
+    value: String
+    username: String
+    role: RoleSearchInput
+  ): Int!
+  userSearch(
+    page: Int
+    size: Int
+    fields: [FieldInput!]
+    value: String
+    username: String
+    role: RoleSearchInput
+  ): [User!]!
+
+  # TASK
+  task(id: ID!): Task!
+  tasks(page: Int, size: Int): [Task!]!
+  taskCount(fields: [FieldInput!], value: String): Int!
+  taskSearch(
+    page: Int
+    size: Int
+    fields: [FieldInput!]
+    value: String
+  ): [Task!]!
+
+  # CUSTOMER
+  customer(id: ID!): Customer!
+  customers(page: Int, size: Int): [Customer!]!
+  customerCount(fields: [FieldInput!], value: String, salesManager: RelationInput, accountExecutive: RelationInput): Int!
+  customerSearch(
+    page: Int
+    size: Int
+    fields: [FieldInput!]
+    value: String
+     salesManager: RelationInput
+     accountExecutive: RelationInput
+  ): [Customer!]!
+  
+
+  # ROLES
+  role(id: ID, type: String): Role!
+  roles: [Role!]!
+
+  # FIELDS
+  field(id: ID!): Field!
+  fields(static: Boolean, read: Boolean, write: Boolean): [Field!]!
+  fieldsByEntity(
+    entity: FieldEntity!
+    static: Boolean
+    read: Boolean
+    write: Boolean
+  ): [Field]!
+}
+
+type Mutation {
+  resetPassword(id:ID, username: String, password: String!): Boolean
+  authenticateUser(username: String!, password: String!): AuthenticatedUser!
+  createUser(
+    username: String!
+    password: String!
+    role: String!
+    fields: [FieldInput!]!
+  ): AuthenticatedUser!
+  updateUser(id: ID!, fields: [FieldInput!]!, username: String, role: String): User!
+  createRole(name: String!, type: String!): Role!
+  updateRole(id: ID!, name: String!, type: String!, permissions: Json!): Role!
+  createField(
+    name: String!
+    type: FieldType!
+    entity: FieldEntity!
+    values: [String!]
+    read: [String!]
+    write: [String!]
+    size: Int
+    order: Int
+    static: Boolean
+  ): Field!
+  updateField(
+    id: ID!
+    name: String
+    values: [String!]
+    read: [String!]
+    write: [String!]
+    size: Int
+    order: Int
+    static: Boolean
+  ): Field!
+  createCustomer(fields: [FieldInput!]!, salesManager: RelationInput, accountExecutive: RelationInput): EntityOutput!
+  updateCustomer(id: ID!, fields: [FieldInput!]!, salesManager: RelationInput, accountExecutive: RelationInput): EntityOutput!
+  createTask(
+    fields: [FieldInput!]!
+    user: RelationInput
+    job: RelationInput
+    customer: RelationInput
+  ): EntityOutput!
+  updateTask(
+    id: ID!
+    fields: [FieldInput!]!
+    user: RelationInput
+    job: RelationInput
+    customer: RelationInput
+  ): EntityOutput!
+  createJob(
+    fields: [FieldInput!]!
+    # users: [RelationInput!]
+    customer: RelationInput
+  ): EntityOutput!
+  updateJob(
+    id: ID!
+    fields: [FieldInput!]!
+    # users: [RelationInput!]
+    customer: RelationInput
+  ): EntityOutput!
+  createThread(type: FieldEntity!, entity: ID!, author: ID!, title: String!): Thread!
+  updateThread(id: ID!, title: String!): Thread!
+  createComment(body: String!, author: ID!, thread: ID!): Thread!
+  updateComment(id: ID!, body: String!): Thread!
+  updateNotification(id: ID, read: Boolean): Notification!
+  markAllNotificationsAsRead:  BatchPayload!
+}
+
+type Subscription {
+  notification(where: NotificationSubscriptionWhereInput): NotificationSubscriptionPayload
+}
+
+input FieldInput {
+  id: ID
+  field: ID!
+  value: ValueInput!
+}
+
+input RoleSearchInput {
+  type: String!
+}
+
+type EntityOutput {
+  id: ID!
+  fields: [FieldValue!]!
+}
+
+type AuthenticatedUser {
+  user: User!
+  token: String!
+}
+
+input ValueInput {
+  id: ID
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOAD: String
+  UPLOADS: [String!]
+}
+
+type ValueOutput {
+  id: ID!
+  TEXT: String
+  LONGTEXT: String
+  NUMBER: Float
+  CURRENCY: Float
+  SELECT: String
+  DATE: DateTime
+  YESNO: Boolean
+  UPLOAD: File
+  UPLOADS: [File!]
+}
+
+input RelationInput {
+  id: ID
+}

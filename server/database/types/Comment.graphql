@@ -1,0 +1,9 @@
+# Thread
+type Comment {
+  id: ID! @unique
+  body: String
+  thread: Thread! @relation(name: "ThreadCommentRelation", onDelete: SET_NULL)
+  author: User! @relation(name: "CommentUserRelation", onDelete: SET_NULL)
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
